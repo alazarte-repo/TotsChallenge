@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Octokit;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -85,6 +87,38 @@ namespace TotsChallenge.Controllers
             catch (Exception e)
             {
                 return BadRequest("[TotsChallenge.Controllers.Repo.DeleteRepo.Error]: " + e.Message);
+            }
+        }
+
+        [HttpGet("/ListRepo")]
+        public async Task<IActionResult> ListRepo()
+        {
+            try
+            {
+                this.GetAuth();
+
+                var repositoryList = await client.Repository.GetAllForCurrent();
+
+                List<object> list = new List<object>();
+                List<KeyValuePair<string, string>> item = null;
+
+                foreach (var repo in repositoryList)
+                {
+                    item = new List<KeyValuePair<string, string>>()
+                    {
+                        new KeyValuePair<string, string>("Id", repo.Id.ToString()),
+                        new KeyValuePair<string, string>("Name", repo.Name),
+                        new KeyValuePair<string, string>("Description", (string.IsNullOrEmpty(repo.Description) ? null : repo.Description))
+                    };
+
+                    list.Add(item);
+                }
+
+                return Ok(list);
+            }
+            catch (Exception e)
+            {
+                return BadRequest("[TotsChallenge.Controllers.Repo.ListRepo.Error]: " + e.Message);
             }
         }
 

@@ -25,7 +25,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "USER_GITHUB": "alazarte-repo",
-        "PERSONAL_ACCESS_TOKEN": "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"
+        "PERSONAL_ACCESS_TOKEN": "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"
       }
     }
   }
