@@ -19,12 +19,13 @@
     },
     "TotsChallenge": {
       "commandName": "Project",
-      "dotnetRunMessages": "true",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "USER_GITHUB": "alazarte-repo",
+        "PERSONAL_ACCESS_TOKEN": "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"
       }
     }
   }
