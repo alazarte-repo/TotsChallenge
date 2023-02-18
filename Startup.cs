@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace TotsChallenge
 {
@@ -24,6 +25,18 @@ namespace TotsChallenge
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TotsChallenge", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "TotsChallenge",
+                    Version = "v1",
+                    Description = "Document description from TotChallenge's API.",
+                    Contact = new OpenApiContact
+                    {
+                        Email = "adrianlazarte@live.com.ar",
+                        Url = new Uri("https://www.linkedin.com/in/adrian-lazarte/"),
+                    }
+                });
+                c.IncludeXmlComments("TotsChallenge.xml");
             });
         }
 
