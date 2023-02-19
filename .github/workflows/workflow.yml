@@ -1,4 +1,4 @@
-﻿# This workfow shows how to build a Docker image, tag and push it to DigitalOcean Container Registry, and
+# This workfow shows how to build a Docker image, tag and push it to DigitalOcean Container Registry, and
 # deploy the application on a DIgitalOcean Kubernetes cluster. For description to the entire worklow, 
 # see www.digitalocean.com/docs/kubernetes/how-to/deploy-using-github-actions.
 
@@ -8,7 +8,7 @@ name: Build, push, and deploy
 on: 
   # Triggers the workflow on push request on the main branch for changes in the specified paths.
   push:
-    branches: [ main ]
+    branches: [ "main" ]
     paths:
       - 'Controllers/**'
       - 'Properties/*'
