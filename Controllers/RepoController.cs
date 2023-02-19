@@ -171,7 +171,7 @@ namespace TotsChallenge.Controllers
                             sb.AppendLine("---");
                             sb.AppendLine();
 
-                            var (owner, repoName, filePath, branch) = (Environment.GetEnvironmentVariable("USER_GITHUB", EnvironmentVariableTarget.Machine), repository.repo,
+                            var (owner, repoName, filePath, branch) = (Environment.GetEnvironmentVariable("USER_GITHUB", EnvironmentVariableTarget.Process), repository.repo,
                                     "./" + newNameFile + "", "main");
 
                             await client.Repository.Content.CreateFile(
@@ -198,7 +198,7 @@ namespace TotsChallenge.Controllers
         {
             try
             {
-                var result = await client.Repository.Content.GetAllContents(Environment.GetEnvironmentVariable("USER_GITHUB", EnvironmentVariableTarget.Machine), repository, "./");
+                var result = await client.Repository.Content.GetAllContents(Environment.GetEnvironmentVariable("USER_GITHUB", EnvironmentVariableTarget.Process), repository, "./");
                 return result.Where(files => files.Name.Equals(name)).Count();
             }
             catch (Exception e)
