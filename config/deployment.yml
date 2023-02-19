@@ -27,7 +27,7 @@ spec:
         - name: USER_GITHUB
           value: "alazarte-repo"
         - name: PERSONAL_ACCESS_TOKEN
-          value: "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"
+          value: "Z2hwX2RHTjVxc21ZYkRUOEV3aUFSbWUzTWY0dkFJMUpOQTB6Yk9DWQ=="
 
 ---
 apiVersion: v1
