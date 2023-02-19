@@ -24,12 +24,13 @@ namespace TotsChallenge.Controllers
             try
             {
                 //Set the personal access token from GitHub page to get user's credential
+                Console.WriteLine("Start get token.");
                 string token = Encoding.UTF8.GetString(Convert.FromBase64String(Environment.GetEnvironmentVariable("PERSONAL_ACCESS_TOKEN", EnvironmentVariableTarget.Machine)));
                 Console.WriteLine(token);
-                Console.WriteLine(Environment.GetEnvironmentVariable("USER_GITHUB", EnvironmentVariableTarget.Machine));
                 Credentials credentials = new Credentials(token);
-                Console.Write(credentials);
+                Console.WriteLine(Environment.GetEnvironmentVariable("USER_GITHUB", EnvironmentVariableTarget.Machine));
                 client = new GitHubClient(new ProductHeaderValue(Environment.GetEnvironmentVariable("USER_GITHUB", EnvironmentVariableTarget.Machine))) { Credentials = credentials };
+                Console.WriteLine("Get token succesfully.");
             }
             catch (Exception e)
             {
