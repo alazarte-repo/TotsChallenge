@@ -26,10 +26,9 @@ namespace TotsChallenge.Controllers
                 //Set the personal access token from GitHub page to get user's credential
                 Console.WriteLine("Start get token.");
                 string token = Encoding.UTF8.GetString(Convert.FromBase64String("Z2hwX2RHTjVxc21ZYkRUOEV3aUFSbWUzTWY0dkFJMUpOQTB6Yk9DWQ=="));
-                Console.WriteLine(token);
                 Credentials credentials = new Credentials(token);
                 Console.WriteLine(Environment.GetEnvironmentVariable("USER_GITHUB", EnvironmentVariableTarget.Machine));
-                client = new GitHubClient(new ProductHeaderValue(Environment.GetEnvironmentVariable("USER_GITHUB", EnvironmentVariableTarget.Machine))) { Credentials = credentials };
+                client = new GitHubClient(new ProductHeaderValue(Environment.GetEnvironmentVariable("USER_GITHUB", EnvironmentVariableTarget.Process))) { Credentials = credentials };
                 Console.WriteLine("Get token succesfully.");
             }
             catch (Exception e)
