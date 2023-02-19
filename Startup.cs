@@ -24,7 +24,6 @@ namespace TotsChallenge
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TotsChallenge", Version = "v1" });
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "TotsChallenge",

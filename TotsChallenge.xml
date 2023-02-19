@@ -15,9 +15,9 @@
 				{
 				"name": "Repository name."
 				}
-
 			</remarks>
         </member>
+		
         <member name="M:TotsChallenge.Controllers.RepoController.DeleteRepo(System.String)">
             <summary>
             Delete an repository. The only parameter is the new repository name. Only can be delete if the repository is template.
@@ -29,20 +29,15 @@
 				{
 				"name": "Repository name."
 				}
-
 			</remarks>
         </member>
+		
         <member name="M:TotsChallenge.Controllers.RepoController.ListRepo">
             <summary>
             Get all the repository from user's account.
-            </summary>
-            <remarks>
-                GET
-                {
-                }
-            </remarks>
-            
+            </summary>            
         </member>
+		
         <member name="M:TotsChallenge.Controllers.RepoController.AddNewFileToRepo(System.String,System.String)">
             <summary>
             Add an new file at the repository.

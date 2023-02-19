@@ -1,5 +1,4 @@
-﻿{
-  "$schema": "http://json.schemastore.org/launchsettings.json",
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -8,25 +7,18 @@
       "sslPort": 44333
     }
   },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
     "TotsChallenge": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
+        "PERSONAL_ACCESS_TOKEN": "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",
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "USER_GITHUB": "alazarte-repo",
-        "PERSONAL_ACCESS_TOKEN": "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"
-      }
+        "USER_GITHUB": "alazarte-repo"
+      },
+      "applicationUrl": "https://localhost:5001;http://localhost:5000"
     }
   }
 }
