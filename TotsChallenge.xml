@@ -4,53 +4,25 @@
         <name>TotsChallenge</name>
     </assembly>
     <members>
-        <member name="M:TotsChallenge.Controllers.RepoController.CreateRepo(System.String)">
+        <member name="M:TotsChallenge.Controllers.RepoController.CreateRepo(TotsChallenge.Models.Repository)">
             <summary>
             Create a new repository. The only parameter is the repository name. The characters limit is until 30. It have special characters will be delete.
             </summary>
-            <remarks>
-				Params description
-
-				GET
-				{
-				"name": "Repository name."
-				}
-			</remarks>
         </member>
-		
-        <member name="M:TotsChallenge.Controllers.RepoController.DeleteRepo(System.String)">
+        <member name="M:TotsChallenge.Controllers.RepoController.DeleteRepo(TotsChallenge.Models.Repository)">
             <summary>
-            Delete an repository. The only parameter is the new repository name. Only can be delete if the repository is template.
+            Delete an repository. The only parameter is the new repository name. Only can be delete the repository is template.
             </summary>
-            <remarks>
-				Params description
-
-				POST
-				{
-				"name": "Repository name."
-				}
-			</remarks>
         </member>
-		
         <member name="M:TotsChallenge.Controllers.RepoController.ListRepo">
             <summary>
             Get all the repository from user's account.
-            </summary>            
+            </summary>
         </member>
-		
-        <member name="M:TotsChallenge.Controllers.RepoController.AddNewFileToRepo(System.String,System.String)">
+        <member name="M:TotsChallenge.Controllers.RepoController.AddNewFileToRepo(TotsChallenge.Models.Repository,TotsChallenge.Models.File)">
             <summary>
             Add an new file at the repository.
             </summary>
-            <remarks>
-				Params description
-
-				POST
-				{
-				"repo": "Repository name.",
-				"name": "New file name."
-				}
-			</remarks>
         </member>
     </members>
 </doc>

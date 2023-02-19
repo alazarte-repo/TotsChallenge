@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using TotsChallenge.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -33,19 +34,22 @@ namespace TotsChallenge.Controllers
             }
         }
 
+        /// <summary>
+        /// Create a new repository. The only parameter is the repository name. The characters limit is until 30. It have special characters will be delete.
+        /// </summary>
         [HttpGet("/CreateRepo")]
-        public async Task<IActionResult> CreateRepo(string name)
+        public async Task<IActionResult> CreateRepo([FromQuery] Models.Repository repository)
         {
             try
             {
-                string newNameRepo = RemoveSpecialCharacters(name);
+                string newNameRepo = RemoveSpecialCharacters(repository.repo);
 
                 if (newNameRepo.Length > 30)
                 {
                     return BadRequest("The name of the new repo add is large, try to use another. The limit is 30 characters.");
                 }
 
-                var newRepo = new NewRepository(name)
+                var newRepo = new NewRepository(repository.repo)
                 {
                     AutoInit = true,
                     Description = "This is an new repository from source code with number: " + (DateTime.UnixEpoch.Ticks / 1000000000),
@@ -65,8 +69,11 @@ namespace TotsChallenge.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete an repository. The only parameter is the new repository name. Only can be delete the repository is template.
+        /// </summary>
         [HttpPost("/DeleteRepo")]
-        public async Task<IActionResult> DeleteRepo(string name)
+        public async Task<IActionResult> DeleteRepo([FromQuery] Models.Repository repository)
         {
             try
             {
@@ -76,7 +83,7 @@ namespace TotsChallenge.Controllers
 
                 foreach (var repo in repositoryList)
                 {
-                    if (repo.Name.Equals(name) && repo.IsTemplate == true)
+                    if (repo.Name.Equals(repository.repo) && repo.IsTemplate == true)
                     {
                         //Only can be delete the repository when its attribute "template" is true
                         await client.Repository.Delete(repo.Id);
@@ -92,6 +99,9 @@ namespace TotsChallenge.Controllers
             }
         }
 
+        /// <summary>
+        /// Get all the repository from user's account.
+        /// </summary>
         [HttpGet("/ListRepo")]
         public async Task<IActionResult> ListRepo()
         {
@@ -124,14 +134,17 @@ namespace TotsChallenge.Controllers
             }
         }
 
+        /// <summary>
+        /// Add an new file at the repository.
+        /// </summary>
         [HttpPost("/AddFile")]
-        public async Task<IActionResult> AddNewFileToRepo(string repo, string nameFile)
+        public async Task<IActionResult> AddNewFileToRepo([FromQuery] Models.Repository repository, [FromQuery] File file)
         {
             try
             {
                 this.GetAuth();
 
-                string newNameFile = RemoveSpecialCharacters(nameFile);
+                string newNameFile = RemoveSpecialCharacters(file.name);
 
                 if (newNameFile.Length > 30)
                 {
@@ -143,10 +156,10 @@ namespace TotsChallenge.Controllers
 
                 foreach (var repoItem in repositoryList)
                 {
-                    if (repoItem.Name.Equals(repo))
+                    if (repoItem.Name.Equals(repository.repo))
                     {
                         //Now, is necesary check also if the new name file don't exist inside the repo
-                        int fileExist = await this.SearchFile(repo, nameFile);
+                        int fileExist = await this.SearchFile(repository.repo, file.name);
 
                         if (fileExist.Equals(0))
                         {
@@ -158,7 +171,7 @@ namespace TotsChallenge.Controllers
                             sb.AppendLine("---");
                             sb.AppendLine();
 
-                            var (owner, repoName, filePath, branch) = (Environment.GetEnvironmentVariable("USER_GITHUB"), repo,
+                            var (owner, repoName, filePath, branch) = (Environment.GetEnvironmentVariable("USER_GITHUB", EnvironmentVariableTarget.Machine), repository.repo,
                                     "./" + newNameFile + "", "main");
 
                             await client.Repository.Content.CreateFile(
@@ -181,11 +194,11 @@ namespace TotsChallenge.Controllers
             }
         }
 
-        private async Task<int> SearchFile(string repo, string name)
+        private async Task<int> SearchFile(string repository, string name)
         {
             try
             {
-                var result = await client.Repository.Content.GetAllContents(Environment.GetEnvironmentVariable("USER_GITHUB"), repo, "./");
+                var result = await client.Repository.Content.GetAllContents(Environment.GetEnvironmentVariable("USER_GITHUB", EnvironmentVariableTarget.Machine), repository, "./");
                 return result.Where(files => files.Name.Equals(name)).Count();
             }
             catch (Exception e)
